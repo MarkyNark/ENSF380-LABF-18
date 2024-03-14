@@ -65,7 +65,19 @@ public class Registration{
             throw new IllegalArgumentException("Student must be between the ages of 5 and 18.");
         }
              
-
+        String query = "INSERT INTO competitor (ID, LastName, FirstName, Age, Instrument, TeacherID) VALUES (?,?,?,?,?,?)";
+        try (PreparedStatement stmt = dbConnect.prepareStatement(query)) {
+            stmt.setString(1, id);
+            stmt.setString(2, lName)
+            stmt.setString(3, fName);
+            stmt.setInt(4, age);
+            stmt.setString(5, instrument);
+            stmt.setString(6, teacherID);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+     
 /***********ADD CODE HERE***********/                
 
 
