@@ -3,57 +3,36 @@ Copyright Ann Barcomb and Emily Marasco, 2022-2024
 Licensed under GPL v3
 See LICENSE.txt for more information.
 */
-
 package edu.ucalgary.oop;
 
 import java.sql.*;
 
 public class Registration{
 
-    public final String DBURL;
-    public final String USERNAME;
-    public final String PASSWORD;    
+    private final String DBURL;
+    private final String USERNAME;
+    private final String PASSWORD;    
     
     private Connection dbConnect;
-    private ResultSet results;
-    
+
     public Registration(String url, String user, String pw){
-
-        // Database URL
         this.DBURL = url;
-
-        //  Database credentials
         this.USERNAME = user;
         this.PASSWORD = pw;
     }
 
-
-//Must create a connection to the database, no arguments, no return value    
     public void initializeConnection(){
-
-/***********ADD CODE HERE***********/                
-
-    }
-    
-    String getDburl(){
-        return this.DBURL;
+        try {
+            dbConnect = DriverManager.getConnection(DBURL, USERNAME, PASSWORD);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
-    String getUsername(){
-        return this.USERNAME;
-    }
-    
-    String getPassword(){
-        return this.PASSWORD;
-    }
-
-    
     public String selectAllNames(String tableName){     
-
-/***********ADD CODE HERE***********/                
-
+       
     }
-    
+
     
     public void insertNewCompetitor(String id, String lName, String fName, int age, String instrument, String teacherID){
        
