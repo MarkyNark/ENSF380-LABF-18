@@ -100,15 +100,26 @@ public class Registration{
     
  
     public void deleteCompetitor(String id){
-
-/***********ADD CODE HERE***********/                
+        String query = "DELETE FROM competitor WHERE ID = ?";
+        try (PreparedStatement stmt = dbConnect.prepareStatement(query)) {
+            stmt.setString(1, id);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+            
 
 
     }    
 
     public void close() {
-        
-/***********ADD CODE HERE***********/                
+        try {
+            if (results != null) results.close();
+            if (dbConnect != null) dbConnect.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+             
 
     }
     
