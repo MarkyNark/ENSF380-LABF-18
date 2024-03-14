@@ -30,7 +30,32 @@ public class Registration{
     }
 
     public String selectAllNames(String tableName){     
-       
+        StringBuilder names = new StringBuilder();
+
+        try (Statement myStmt = dbConnect.createStatement();
+             ResultSet results = myStmt.executeQuery("SELECT LName, FName FROM " + tableName)) {
+            
+            while (results.next()){
+                String lastName = results.getString("LName");
+                String firstName = results.getString("FName");
+                names.append(lastName).append(", ").append(firstName).append("\n");
+            }
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return names.toString();
+    }
+
+    public void closeConnection(){
+        try {
+            if (dbConnect != null) {
+                dbConnect.close();
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
     
